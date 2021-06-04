@@ -27,7 +27,7 @@ public class Ball implements Sprite {
      * @param velocity        of ball
      * @param gameEnvironment of ball
      */
-    public Ball(Point center , double radius , Color color , Velocity velocity , GameEnvironment gameEnvironment) {
+    public Ball(Point center, double radius, Color color, Velocity velocity, GameEnvironment gameEnvironment) {
         this.center = center;
         this.radius = radius;
         this.color = color;
@@ -45,9 +45,8 @@ public class Ball implements Sprite {
      * @param velocity        of ball
      * @param gameEnvironment of ball
      */
-    public Ball(double x , double y , double radius , Color color , Velocity velocity ,
-                GameEnvironment gameEnvironment) {
-        this(new Point(x , y) , radius , color , velocity , gameEnvironment);
+    public Ball(double x, double y, double radius, Color color, Velocity velocity, GameEnvironment gameEnvironment) {
+        this(new Point(x, y), radius, color, velocity, gameEnvironment);
     }
 
     /**
@@ -58,8 +57,8 @@ public class Ball implements Sprite {
      * @param radius of ball
      * @param color  of ball
      */
-    public Ball(double x , double y , double radius , java.awt.Color color) {
-        this(new Point(x , y) , radius , color , new Velocity() , new GameEnvironment());
+    public Ball(double x, double y, double radius, java.awt.Color color) {
+        this(new Point(x, y), radius, color, new Velocity(), new GameEnvironment());
     }
 
     /**
@@ -69,8 +68,8 @@ public class Ball implements Sprite {
      * @param radius of ball
      * @param color  of ball
      */
-    public Ball(Point center , int radius , java.awt.Color color) {
-        this(center , radius , color , new Velocity() , new GameEnvironment());
+    public Ball(Point center, int radius, java.awt.Color color) {
+        this(center, radius, color, new Velocity(), new GameEnvironment());
     }
 
     /**
@@ -81,8 +80,8 @@ public class Ball implements Sprite {
      * @param color    of ball
      * @param velocity of ball
      */
-    public Ball(Point center , double radius , Color color , Velocity velocity) {
-        this(center , radius , color , velocity , new GameEnvironment());
+    public Ball(Point center, double radius, Color color, Velocity velocity) {
+        this(center, radius, color, velocity, new GameEnvironment());
     }
 
     /**
@@ -93,8 +92,8 @@ public class Ball implements Sprite {
      * @param color           of ball
      * @param gameEnvironment of ball
      */
-    public Ball(Point center , double radius , Color color , GameEnvironment gameEnvironment) {
-        this(center , radius , color , new Velocity() , gameEnvironment);
+    public Ball(Point center, double radius, Color color, GameEnvironment gameEnvironment) {
+        this(center, radius, color, new Velocity(), gameEnvironment);
     }
 
     /**
@@ -154,8 +153,10 @@ public class Ball implements Sprite {
      * @param surface to draw on
      */
     public void drawOn(DrawSurface surface) {
+        surface.setColor(Color.black);
+        surface.drawCircle(this.getX(), this.getY(), this.getSize());
         surface.setColor(this.getColor());
-        surface.fillCircle(this.getX() , this.getY() , getSize());
+        surface.fillCircle(this.getX(), this.getY(), getSize());
     }
 
     @Override
@@ -174,8 +175,8 @@ public class Ball implements Sprite {
      * @param dx dx
      * @param dy dy
      */
-    public void setVelocity(double dx , double dy) {
-        this.velocity = new Velocity(dx , dy);
+    public void setVelocity(double dx, double dy) {
+        this.velocity = new Velocity(dx, dy);
     }
 
     /**
@@ -204,7 +205,7 @@ public class Ball implements Sprite {
      */
     public void moveOneStep() {
         //next movement of ball
-        Line trajectory = new Line(this.getCenter() , this.getVelocity().applyToPoint(this.getCenter()));
+        Line trajectory = new Line(this.getCenter(), this.getVelocity().applyToPoint(this.getCenter()));
         CollisionInfo collisionInfo = this.getGameEnvironment().getClosestCollision(trajectory);
         //check if collision point exists
         if (collisionInfo == null) {
@@ -212,19 +213,18 @@ public class Ball implements Sprite {
             this.center = this.getVelocity().applyToPoint(this.center);
             return;
         }
-        Velocity newVel =
-                collisionInfo.collisionObject().hit(this , collisionInfo.collisionPoint() , this.getVelocity());
+        Velocity newVel = collisionInfo.collisionObject().hit(this, collisionInfo.collisionPoint(), this.getVelocity());
         //special case of paddle run over the ball, in such case return the ball to collision point
         // and make one step until ball is out of collidable
         if (this.isInsideCollidable()) {
             setVelocity(newVel);
             this.center =
-                    new Point(collisionInfo.collisionPoint().getX() - (-1) * Math.signum(this.getVelocity().getDx()) ,
+                    new Point(collisionInfo.collisionPoint().getX() - (-1) * Math.signum(this.getVelocity().getDx()),
                             collisionInfo.collisionPoint().getY() - (-1) * Math.signum(this.getVelocity().getDy()));
             return;
         }
         //if ball about to hit a collidable take it almost to hit point and set new velocity from hit method of block
-        this.center = new Point(collisionInfo.collisionPoint().getX() + (-1) * Math.signum(this.getVelocity().getDx()) ,
+        this.center = new Point(collisionInfo.collisionPoint().getX() + (-1) * Math.signum(this.getVelocity().getDx()),
                 collisionInfo.collisionPoint().getY() + (-1) * Math.signum(this.getVelocity().getDy()));
         this.setVelocity(newVel);
     }

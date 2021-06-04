@@ -191,7 +191,7 @@ public class GameLevel implements Animation {
         for (int i = 1; i <= numOfBalls; i++) {
             Ball ball = new Ball((int) this.paddle.getCollisionRectangle().getUpperLeft().getX() + ballXDelta * i,
                     this.paddle.getCollisionRectangle().getUpperLeft().getY() - BALLS_RADIUS_OR_SPEED,
-                    BALLS_RADIUS_OR_SPEED, Color.red, levelInformation.initialBallVelocities().get(i - 1),
+                    BALLS_RADIUS_OR_SPEED, Color.white, levelInformation.initialBallVelocities().get(i - 1),
                     this.environment);
             ball.addToGame(this);
             remainingBalls.increase(1);
