@@ -30,7 +30,7 @@ public class CountdownAnimation implements Animation {
         }
         Sleeper sleeper = new Sleeper();
         gameScreen.drawAllOn(d);
-        d.drawText(400, 300, String.valueOf(this.countFrom--), 50);
+        d.drawText(390, 300, String.valueOf(this.countFrom--), 50);
         sleeper.sleepFor((long) (numOfSeconds / numOfCounts));
     }
 

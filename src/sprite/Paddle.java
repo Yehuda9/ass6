@@ -15,6 +15,7 @@ import java.awt.Color;
 public class Paddle implements Sprite, Collidable {
     private biuoop.KeyboardSensor keyboard;
     private Block block;
+    private int speed;
 
     /**
      * create new paddle with KeyboardSensor and block.
@@ -36,12 +37,16 @@ public class Paddle implements Sprite, Collidable {
         this(new Block(new Rectangle(new Point(360 , 570) , 150 , 20) , new Color(236 , 99 , 64)) , keyboardSensor);
     }
 
+    public void setSpeed(int s) {
+        this.speed = s;
+    }
+
     /**
      * move paddle to the left by creating new block to the left of previous paddle.
      */
     public void moveLeft() {
         this.block = new Block(new Rectangle(
-                new Point(block.getCollisionRectangle().getUpperLeft().getX() - GameLevel.BALLS_RADIUS_OR_SPEED ,
+                new Point(block.getCollisionRectangle().getUpperLeft().getX() - speed ,
                         block.getCollisionRectangle().getUpperLeft().getY()) ,
                 block.getCollisionRectangle().getWidth() , block.getCollisionRectangle().getHeight()) ,
                 getBlock().getColor());
@@ -52,7 +57,7 @@ public class Paddle implements Sprite, Collidable {
      */
     public void moveRight() {
         this.block = new Block(new Rectangle(
-                new Point(block.getCollisionRectangle().getUpperLeft().getX() + GameLevel.BALLS_RADIUS_OR_SPEED ,
+                new Point(block.getCollisionRectangle().getUpperLeft().getX() + speed ,
                         block.getCollisionRectangle().getUpperLeft().getY()) ,
                 block.getCollisionRectangle().getWidth() , block.getCollisionRectangle().getHeight()) ,
                 getBlock().getColor());

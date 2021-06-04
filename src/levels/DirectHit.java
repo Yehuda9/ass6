@@ -1,5 +1,6 @@
-package game;
+package levels;
 
+import game.LevelInformation;
 import geometry.Point;
 import geometry.Rectangle;
 import sprite.Block;
@@ -12,9 +13,17 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class DirectHit implements LevelInformation {
+    public static final int GUI_WIDTH = 800;
+    private static final int GUI_HEIGHT = 600;
+    public static final int PADDLE_SPEED = 7;
+    private static final int PADDLE_WIDTH = 150;
+    private static final int BLOCK_WIDTH = 50;
+    private static final int BLOCK_HEIGHT = 50;
+
+
     @Override
     public int numberOfBalls() {
-        return 1;
+        return initialBallVelocities().size();
     }
 
     @Override
@@ -26,12 +35,12 @@ public class DirectHit implements LevelInformation {
 
     @Override
     public int paddleSpeed() {
-        return 7;
+        return PADDLE_SPEED;
     }
 
     @Override
     public int paddleWidth() {
-        return 150;
+        return PADDLE_WIDTH;
     }
 
     @Override
@@ -41,18 +50,20 @@ public class DirectHit implements LevelInformation {
 
     @Override
     public Sprite getBackground() {
-        return new Block(new Rectangle(new Point(0, 0), 800, 600), new Color(24, 47, 78));
+        return new DirectHitBackground();
     }
 
     @Override
     public List<Block> blocks() {
         List<Block> lst = new LinkedList<>();
-        lst.add(new Block(new Rectangle(new Point(400, 400), 50, 50), Color.black));
+        lst.add(new Block(
+                new Rectangle(new Point(GUI_WIDTH / 2.0 - BLOCK_WIDTH / 2.0, 135), BLOCK_WIDTH, BLOCK_HEIGHT),
+                Color.red));
         return lst;
     }
 
     @Override
     public int numberOfBlocksToRemove() {
-        return 1;
+        return blocks().size();
     }
 }

@@ -1,5 +1,6 @@
-import game.DirectHit;
+import levels.DirectHit;
 import game.GameLevel;
+import levels.WideEasy;
 
 /**
  * @author Yehuda Schwartz 208994285
@@ -11,7 +12,7 @@ public class Ass5Game {
      * @param args commend line arguments
      */
     public static void main(String[] args) {
-        GameLevel gameLevel = new GameLevel(new DirectHit());
+        GameLevel gameLevel = new GameLevel(new WideEasy());
         gameLevel.initialize();
         gameLevel.run();
     }

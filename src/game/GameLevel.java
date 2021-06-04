@@ -53,18 +53,19 @@ public class GameLevel implements Animation {
 
     /**
      * create new game object with new game.SpriteCollection and game.GameEnvironment.
+     *
      * @param lvlInfo holds level info reference
      */
     public GameLevel(LevelInformation lvlInfo) {
         setGui(new GUI("game.Game", GUI_WIDTH, GUI_HEIGHT));
+        this.levelInformation = lvlInfo;
         this.keyboard = gui.getKeyboardSensor();
         this.sprites = new SpriteCollection();
         this.environment = new GameEnvironment();
-        this.remainingBlocks = new Counter(0);
+        this.remainingBlocks = new Counter(levelInformation.numberOfBlocksToRemove());
         this.remainingBalls = new Counter(0);
         this.currentScore = new Counter(0);
         this.runner = new AnimationRunner(gui, 60);
-        this.levelInformation = lvlInfo;
     }
 
     /**
@@ -125,6 +126,7 @@ public class GameLevel implements Animation {
      * Initialize a new game: create the Blocks and sprite.Ball (and sprite.Paddle) and add them to the game.
      */
     public void initialize() {
+        levelInformation.getBackground().addToGame(this);
         initializePaddle();
         initializeBlocks();
         initializeBorders();
@@ -162,32 +164,21 @@ public class GameLevel implements Animation {
      * create paddle.
      */
     private void initializePaddle() {
-        setPaddle(new Paddle(
-                new Block(new Rectangle(new Point(360, GUI_HEIGHT - PADDLE_SIZE - FRAME_SIZE), 150, PADDLE_SIZE),
-                        new Color(236, 99, 64)), this.gui.getKeyboardSensor()));
+        Paddle pdl = new Paddle(new Block(new Rectangle(
+                new Point(400 - levelInformation.paddleWidth() / 2.0, GUI_HEIGHT - PADDLE_SIZE - FRAME_SIZE),
+                levelInformation.paddleWidth(), PADDLE_SIZE), new Color(243, 182, 41)), this.gui.getKeyboardSensor());
+        pdl.setSpeed(levelInformation.paddleSpeed());
+        setPaddle(pdl);
         this.paddle.addToGame(this);
     }
 
-    /**
-     * create "triangular matrix" of blocks.
-     */
     private void initializeBlocks() {
         BlockRemover blockRemover = new BlockRemover(this, remainingBlocks);
         ScoreTrackingListener scoreTrackingListener = new ScoreTrackingListener(currentScore);
-        int blockX = BLOCK_X_START;
-        int blockY = BLOCK_Y_START;
-        for (int i = 1; i <= 6; i++) {
-            for (int j = 0; j < 12 - i; j++) {
-                Block block = new Block(new Rectangle(new Point(blockX, blockY), BLOCK_WIDTH, BLOCK_HEIGHT),
-                        new Color(i * 30, 100, 50));
-                block.addHitListeners(blockRemover);
-                block.addHitListeners(scoreTrackingListener);
-                block.addToGame(this);
-                remainingBlocks.increase(1);
-                blockX += BLOCK_WIDTH;
-            }
-            blockX = BLOCK_WIDTH * i + BLOCK_X_START;
-            blockY += BLOCK_HEIGHT;
+        for (Block block : levelInformation.blocks()) {
+            block.addToGame(this);
+            block.addHitListeners(blockRemover);
+            block.addHitListeners(scoreTrackingListener);
         }
     }
 
@@ -195,14 +186,13 @@ public class GameLevel implements Animation {
      * create 3 balls.
      */
     private void createBallsOnTopOfPaddle() {
-        Random random = new Random();
-        int numOfBalls = 3;
-        int ballXDelta = (int) this.paddle.getCollisionRectangle().getUpperLine().length() / (numOfBalls - 1);
-        for (int i = 0; i < numOfBalls; i++) {
+        int numOfBalls = levelInformation.numberOfBalls();
+        int ballXDelta = (int) this.paddle.getCollisionRectangle().getUpperLine().length() / (numOfBalls + 1);
+        for (int i = 1; i <= numOfBalls; i++) {
             Ball ball = new Ball((int) this.paddle.getCollisionRectangle().getUpperLeft().getX() + ballXDelta * i,
                     this.paddle.getCollisionRectangle().getUpperLeft().getY() - BALLS_RADIUS_OR_SPEED,
-                    BALLS_RADIUS_OR_SPEED, Color.red,
-                    Velocity.fromAngleAndSpeed(random.nextInt(360) + 1, BALLS_RADIUS_OR_SPEED), this.environment);
+                    BALLS_RADIUS_OR_SPEED, Color.red, levelInformation.initialBallVelocities().get(i - 1),
+                    this.environment);
             ball.addToGame(this);
             remainingBalls.increase(1);
         }
