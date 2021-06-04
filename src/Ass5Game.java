@@ -1,5 +1,6 @@
 import levels.DirectHit;
 import game.GameLevel;
+import levels.Green3;
 import levels.WideEasy;
 
 /**
@@ -12,7 +13,7 @@ public class Ass5Game {
      * @param args commend line arguments
      */
     public static void main(String[] args) {
-        GameLevel gameLevel = new GameLevel(new WideEasy());
+        GameLevel gameLevel = new GameLevel(new Green3());
         gameLevel.initialize();
         gameLevel.run();
     }

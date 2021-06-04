@@ -29,7 +29,7 @@ import java.util.Random;
  */
 public class GameLevel implements Animation {
     public static final int GUI_WIDTH = 800;
-    public static final int BALLS_RADIUS_OR_SPEED = 7;
+    public static final int BALLS_RADIUS_OR_SPEED = 5;
     public static final int FRAME_SIZE = 10;
     private static final int GUI_HEIGHT = 600;
     private static final int BALLS_X_START = 400;
