@@ -24,11 +24,15 @@ public class Rectangle {
      * @param width     of rectangle
      * @param height    of rectangle
      */
-    public Rectangle(Point upperLeft , double width , double height) {
+    public Rectangle(Point upperLeft, double width, double height) {
         this.upperLeft = upperLeft;
         this.width = width;
         this.height = height;
         createRectangleLines();
+    }
+
+    public void setUpperLeftX(int x) {
+        this.upperLeft = new Point(x, upperLeft.getY());
     }
 
     /**
@@ -37,13 +41,13 @@ public class Rectangle {
      */
     private void createRectangleLines() {
         List<Line> rectangleLinesList = new ArrayList<>();
-        this.upperLine = new Line(this.getUpperLeft() ,
-                new Point(this.getUpperLeft().getX() + this.getWidth() , this.getUpperLeft().getY()));
-        this.leftLine = new Line(this.getUpperLeft() ,
-                new Point(this.getUpperLeft().getX() , this.getUpperLeft().getY() + getHeight()));
+        this.upperLine = new Line(this.getUpperLeft(),
+                new Point(this.getUpperLeft().getX() + this.getWidth(), this.getUpperLeft().getY()));
+        this.leftLine = new Line(this.getUpperLeft(),
+                new Point(this.getUpperLeft().getX(), this.getUpperLeft().getY() + getHeight()));
         this.rightLine =
-                new Line(upperLine.end() , new Point(upperLine.end().getX() , upperLine.end().getY() + getHeight()));
-        this.lowerLine = new Line(leftLine.end() , rightLine.end());
+                new Line(upperLine.end(), new Point(upperLine.end().getX(), upperLine.end().getY() + getHeight()));
+        this.lowerLine = new Line(leftLine.end(), rightLine.end());
         rectangleLinesList.add(leftLine);
         rectangleLinesList.add(rightLine);
         rectangleLinesList.add(lowerLine);

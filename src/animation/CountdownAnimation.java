@@ -25,7 +25,7 @@ public class CountdownAnimation implements Animation {
     }
 
     public void doOneFrame(DrawSurface d) {
-        if (this.countFrom == 0) {
+        if (this.countFrom < 0) {
             this.stop = true;
         }
         Sleeper sleeper = new Sleeper();

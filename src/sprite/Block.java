@@ -32,6 +32,9 @@ public class Block implements Collidable, Sprite, HitNotifier {
         this.color = color;
         this.hitListeners = new LinkedList<>();
     }
+    public void setX(int x){
+        this.rectangle.setUpperLeftX(x);
+    }
 
     /**
      * create new block with rectangle and default black color.

@@ -1,7 +1,6 @@
 package animation;
 
 import biuoop.DrawSurface;
-import biuoop.KeyboardSensor;
 
 public class EndScreen implements Animation {
     private boolean WinOrLose;

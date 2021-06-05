@@ -3,17 +3,14 @@ package game;
 import animation.Animation;
 import animation.AnimationRunner;
 import animation.CountdownAnimation;
-import animation.EndScreen;
 import animation.GameInfo;
 import animation.KeyPressStoppableAnimation;
 import animation.PauseScreen;
 import biuoop.DrawSurface;
-import biuoop.GUI;
 import biuoop.KeyboardSensor;
 import observer.BallRemover;
 import observer.BlockRemover;
 import observer.Counter;
-import observer.ScoreIndicator;
 import observer.ScoreTrackingListener;
 import sprite.Ball;
 import sprite.Block;
@@ -22,10 +19,8 @@ import sprite.Paddle;
 import sprite.Sprite;
 import geometry.Rectangle;
 import geometry.Point;
-import sprite.Velocity;
 
 import java.awt.Color;
-import java.util.Random;
 
 /**
  * @author Yehuda Schwartz 208994285
@@ -35,16 +30,9 @@ public class GameLevel implements Animation {
     public static final int BALLS_RADIUS_OR_SPEED = 5;
     public static final int FRAME_SIZE = 10;
     private static final int GUI_HEIGHT = 600;
-    private static final int BALLS_X_START = 400;
-    private static final int BALLS_Y_START = 400;
-    private static final int BLOCK_WIDTH = 60;
-    private static final int BLOCK_HEIGHT = 30;
-    private static final int BLOCK_X_START = 130;
-    private static final int BLOCK_Y_START = 100;
     private static final int PADDLE_SIZE = 20;
     private SpriteCollection sprites;
     private GameEnvironment environment;
-    private GUI gui;
     private KeyboardSensor keyboard;
     private Paddle paddle;
     private Counter remainingBlocks;
@@ -62,7 +50,6 @@ public class GameLevel implements Animation {
      * @param lvlInfo holds level info reference
      */
     public GameLevel(LevelInformation lvlInfo, KeyboardSensor keyboard, AnimationRunner ar, Counter score, Counter l) {
-        //setGui(new GUI("game.Game", GUI_WIDTH, GUI_HEIGHT));
         this.levelInformation = lvlInfo;
         this.keyboard = keyboard;
         this.sprites = new SpriteCollection();
@@ -73,14 +60,6 @@ public class GameLevel implements Animation {
         this.runner = ar;
         running = true;
         this.lives = l;
-    }
-
-    public LevelInformation getLevelInformation() {
-        return levelInformation;
-    }
-
-    public Counter getRemainingBalls() {
-        return remainingBalls;
     }
 
     public Counter getRemainingBlocks() {
@@ -105,23 +84,6 @@ public class GameLevel implements Animation {
         return environment;
     }
 
-    /**
-     * set paddle.
-     *
-     * @param paddle1 to set
-     */
-    public void setPaddle(Paddle paddle1) {
-        this.paddle = paddle1;
-    }
-
-    /**
-     * set gui.
-     *
-     * @param gui1 to set.
-     */
-    public void setGui(GUI gui1) {
-        this.gui = gui1;
-    }
 
     /**
      * add collidable to game environment.
@@ -149,18 +111,17 @@ public class GameLevel implements Animation {
         initializePaddle();
         initializeBlocks();
         initializeBorders();
-        initializeScore();
+        initializeGameInfo();
     }
 
     /**
      * create score indicator block from block and counter.
      */
-    private void initializeScore() {
-        Block scoreIndicatorBlock = new Block(new Rectangle(new Point(0, 0), GUI_WIDTH, FRAME_SIZE + 20), Color.white);
-        ScoreIndicator scoreIndicator = new ScoreIndicator(scoreIndicatorBlock, currentScore);
-        scoreIndicator.addToGame(this);
-        LivesIndicator livesIndicator = new LivesIndicator(this.lives);
-        livesIndicator.addToGame(this);
+    private void initializeGameInfo() {
+        Block gameInfoBlock = new Block(new Rectangle(new Point(0, 0), GUI_WIDTH, FRAME_SIZE + 20), Color.white);
+        GameInfo gameInfo =
+                new GameInfo(gameInfoBlock, this.currentScore, this.lives, this.levelInformation.levelName());
+        gameInfo.addToGame(this);
     }
 
     /**
@@ -185,11 +146,10 @@ public class GameLevel implements Animation {
      * create paddle.
      */
     private void initializePaddle() {
-        Paddle pdl = new Paddle(new Block(new Rectangle(
+        this.paddle = new Paddle(new Block(new Rectangle(
                 new Point(400 - levelInformation.paddleWidth() / 2.0, GUI_HEIGHT - PADDLE_SIZE - FRAME_SIZE),
-                levelInformation.paddleWidth(), PADDLE_SIZE), new Color(243, 182, 41)), this.keyboard);
-        pdl.setSpeed(levelInformation.paddleSpeed());
-        setPaddle(pdl);
+                levelInformation.paddleWidth(), PADDLE_SIZE), new Color(243, 182, 41)), this.keyboard,
+                levelInformation.paddleSpeed());
         this.paddle.addToGame(this);
     }
 
@@ -215,15 +175,8 @@ public class GameLevel implements Animation {
                     new Ball(ballX, this.paddle.getCollisionRectangle().getUpperLeft().getY() - BALLS_RADIUS_OR_SPEED,
                             BALLS_RADIUS_OR_SPEED, Color.white, levelInformation.initialBallVelocities().get(i - 1),
                             this.environment);
-            /*Ball ball = new Ball((int) this.paddle.getCollisionRectangle().getUpperLeft().getX() + ballXDelta * i,
-                    this.paddle.getCollisionRectangle().getUpperLeft().getY() - BALLS_RADIUS_OR_SPEED,
-                    BALLS_RADIUS_OR_SPEED, Color.white, levelInformation.initialBallVelocities().get(i - 1),
-                    this.environment);*/
             ball.addToGame(this);
-            //remainingBalls.increase(1);
         }
-        remainingBalls.setCounter(numOfBalls);
-
     }
 
     /**
@@ -262,7 +215,6 @@ public class GameLevel implements Animation {
         //stop the game if no remaining balls
         if (remainingBalls.getValue() == 0) {
             this.running = false;
-            //lives.decrease(1);
         }
     }
 
@@ -272,6 +224,7 @@ public class GameLevel implements Animation {
     }
 
     public void run() {
+        this.paddle.setPosition(GUI_WIDTH / 2 - levelInformation.paddleWidth() / 2);
         this.createBallsOnTopOfPaddle(); // or a similar method
         this.runner.run(new CountdownAnimation(2000, 3, getSprites()));
         this.running = true;
