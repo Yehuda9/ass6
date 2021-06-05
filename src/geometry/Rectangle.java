@@ -31,10 +31,6 @@ public class Rectangle {
         createRectangleLines();
     }
 
-    public void setUpperLeftX(int x) {
-        this.upperLeft = new Point(x, upperLeft.getY());
-    }
-
     /**
      * create the fields of outer lines of rectangle, based on upper left point and width and height of rectangle.
      * also, make list of those fields as a field.

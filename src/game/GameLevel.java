@@ -224,7 +224,7 @@ public class GameLevel implements Animation {
     }
 
     public void run() {
-        this.paddle.setPosition(GUI_WIDTH / 2 - levelInformation.paddleWidth() / 2);
+        this.paddle.setXPosition(GUI_WIDTH / 2 - levelInformation.paddleWidth() / 2);
         this.createBallsOnTopOfPaddle(); // or a similar method
         this.runner.run(new CountdownAnimation(2000, 3, getSprites()));
         this.running = true;

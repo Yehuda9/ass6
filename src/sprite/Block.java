@@ -42,10 +42,6 @@ public class Block implements Collidable, Sprite, HitNotifier {
         this(rectangle, Color.black);
     }
 
-    public void setX(int x) {
-        this.rectangle.setUpperLeftX(x);
-    }
-
     /**
      * @return color
      */

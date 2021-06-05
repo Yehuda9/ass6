@@ -38,8 +38,10 @@ public class Paddle implements Sprite, Collidable {
         this(new Block(new Rectangle(new Point(360, 570), 150, 20), new Color(236, 99, 64)), keyboardSensor, 7);
     }
 
-    public void setPosition(int x) {
-        this.block.setX(x);
+    public void setXPosition(int x) {
+        this.block = new Block(new Rectangle(new Point(x, block.getCollisionRectangle().getUpperLeft().getY()),
+                block.getCollisionRectangle().getWidth(), block.getCollisionRectangle().getHeight()),
+                getBlock().getColor());
     }
 
     public void setSpeed(int s) {
