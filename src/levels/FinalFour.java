@@ -7,21 +7,20 @@ import sprite.Block;
 import sprite.Sprite;
 import sprite.Velocity;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
-public class Green3 implements LevelInformation {
+public class FinalFour implements LevelInformation {
     public static final int GUI_WIDTH = 800;
+    public static final int PADDLE_SPEED = 12;
     private static final int BLOCK_WIDTH = 52;
     private static final int BLOCK_HEIGHT = 30;
     private static final int GUI_HEIGHT = 600;
-    private static final int BLOCK_X_START = 322;
-    private static final int BLOCK_Y = 150;
-    public static final int PADDLE_SPEED = 10;
-    private static final int PADDLE_WIDTH = 150;
-
-
+    private static final int BLOCK_X_START = 10;
+    private static final int BLOCK_Y_START = 100;
+    private static final int PADDLE_WIDTH = 100;
 
     @Override
     public int numberOfBalls() {
@@ -31,8 +30,10 @@ public class Green3 implements LevelInformation {
     @Override
     public List<Velocity> initialBallVelocities() {
         List<Velocity> lst = new ArrayList<>();
-        lst.add(Velocity.fromAngleAndSpeed(-45, 8));
-        lst.add(Velocity.fromAngleAndSpeed(45, 8));
+        for (int i = 0; i < 3; i++) {
+            Velocity velocity = Velocity.fromAngleAndSpeed(-40 + 40 * i, 8);
+            lst.add(velocity);
+        }
         return lst;
     }
 
@@ -48,28 +49,28 @@ public class Green3 implements LevelInformation {
 
     @Override
     public String levelName() {
-        return "Green 3";
+        return "Final Four";
     }
 
     @Override
     public Sprite getBackground() {
-        return new Green3Background();
+        return new FinalFourBackground();
     }
 
     @Override
     public List<Block> blocks() {
         List<Block> lst = new ArrayList<>();
         int blockX = BLOCK_X_START;
-        int blockY = BLOCK_Y;
-        for (int i = 1; i <= 5; i++) {
-            for (int j = 0; j < 10 - i; j++) {
+        int blockY = BLOCK_Y_START;
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < 15; j++) {
                 Block block = new Block(new Rectangle(new Point(blockX, blockY), BLOCK_WIDTH, BLOCK_HEIGHT),
-                        new Color(i * 30, 100, 50));
+                        new Color(30 * i, 48, 48));
                 lst.add(block);
                 blockX += BLOCK_WIDTH;
             }
-            blockX = BLOCK_WIDTH * i + BLOCK_X_START;
             blockY += BLOCK_HEIGHT;
+            blockX = BLOCK_X_START;
         }
         return lst;
     }

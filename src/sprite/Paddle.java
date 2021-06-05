@@ -39,7 +39,7 @@ public class Paddle implements Sprite, Collidable {
     }
 
     public void setPosition(int x) {
-        block.setX(x);
+        this.block.setX(x);
     }
 
     public void setSpeed(int s) {

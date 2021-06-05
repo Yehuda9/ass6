@@ -22,7 +22,7 @@ public class GameFlow {
         this.animationRunner = new AnimationRunner(gui, 60);
         this.keyboardSensor = gui.getKeyboardSensor();
         this.score = new Counter(0);
-        this.lives = new Counter(2);
+        this.lives = new Counter(7);
     }
 
     public void runLevels(List<LevelInformation> levels) {

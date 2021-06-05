@@ -19,10 +19,12 @@ public class WideEasy implements LevelInformation {
     private static final int GUI_HEIGHT = 600;
     private static final int BLOCK_X_START = 10;
     private static final int BLOCK_Y_START = 250;
+    public static final int PADDLE_SPEED = 5;
+    private static final int PADDLE_WIDTH = 600;
 
     @Override
     public int numberOfBalls() {
-        return 10;
+        return initialBallVelocities().size();
     }
 
     @Override
@@ -41,12 +43,12 @@ public class WideEasy implements LevelInformation {
 
     @Override
     public int paddleSpeed() {
-        return 5;
+        return PADDLE_SPEED;
     }
 
     @Override
     public int paddleWidth() {
-        return 600;
+        return PADDLE_WIDTH;
     }
 
     @Override

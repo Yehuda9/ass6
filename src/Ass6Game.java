@@ -4,6 +4,7 @@ import game.GameFlow;
 import game.LevelInformation;
 import levels.DirectHit;
 import game.GameLevel;
+import levels.FinalFour;
 import levels.Green3;
 import levels.WideEasy;
 
@@ -13,7 +14,7 @@ import java.util.List;
 /**
  * @author Yehuda Schwartz 208994285
  */
-public class Ass5Game {
+public class Ass6Game {
     /**
      * main function to initialize and run game.
      *
@@ -21,6 +22,7 @@ public class Ass5Game {
      */
     public static void main(String[] args) {
         List<LevelInformation> levelInformations = new ArrayList<>();
+        levelInformations.add(new FinalFour());
         levelInformations.add(new DirectHit());
         levelInformations.add(new WideEasy());
         levelInformations.add(new Green3());

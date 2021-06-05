@@ -9,7 +9,6 @@ import java.awt.Color;
 public class DirectHitBackground implements Sprite {
     public static final int GUI_WIDTH = 800;
     private static final int GUI_HEIGHT = 600;
-    
 
     @Override
     public void drawOn(DrawSurface d) {

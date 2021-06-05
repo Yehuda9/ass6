@@ -7,15 +7,15 @@ import sprite.Block;
 import sprite.Sprite;
 import sprite.Velocity;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 public class DirectHit implements LevelInformation {
     public static final int GUI_WIDTH = 800;
-    private static final int GUI_HEIGHT = 600;
     public static final int PADDLE_SPEED = 7;
+    private static final int GUI_HEIGHT = 600;
     private static final int PADDLE_WIDTH = 150;
     private static final int BLOCK_WIDTH = 50;
     private static final int BLOCK_HEIGHT = 50;
@@ -56,8 +56,7 @@ public class DirectHit implements LevelInformation {
     @Override
     public List<Block> blocks() {
         List<Block> lst = new LinkedList<>();
-        lst.add(new Block(
-                new Rectangle(new Point(GUI_WIDTH / 2.0 - BLOCK_WIDTH / 2.0, 135), BLOCK_WIDTH, BLOCK_HEIGHT),
+        lst.add(new Block(new Rectangle(new Point(GUI_WIDTH / 2.0 - BLOCK_WIDTH / 2.0, 135), BLOCK_WIDTH, BLOCK_HEIGHT),
                 Color.red));
         return lst;
     }
