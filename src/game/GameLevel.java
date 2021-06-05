@@ -58,7 +58,7 @@ public class GameLevel implements Animation {
         this.remainingBalls = new Counter(lvlInfo.numberOfBalls());
         this.currentScore = score;
         this.runner = ar;
-        running = true;
+        this.running = true;
         this.lives = l;
     }
 
@@ -212,7 +212,6 @@ public class GameLevel implements Animation {
             currentScore.increase(100);
             this.running = false;
         }
-
         //stop the game if no remaining balls
         if (remainingBalls.getValue() == 0) {
             this.running = false;
