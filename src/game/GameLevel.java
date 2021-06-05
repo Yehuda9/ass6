@@ -56,16 +56,25 @@ public class GameLevel implements Animation {
      *
      * @param lvlInfo holds level info reference
      */
-    public GameLevel(LevelInformation lvlInfo) {
-        setGui(new GUI("game.Game", GUI_WIDTH, GUI_HEIGHT));
+    public GameLevel(LevelInformation lvlInfo, KeyboardSensor keyboard, AnimationRunner ar, Counter score) {
+        //setGui(new GUI("game.Game", GUI_WIDTH, GUI_HEIGHT));
         this.levelInformation = lvlInfo;
-        this.keyboard = gui.getKeyboardSensor();
+        this.keyboard = keyboard;
         this.sprites = new SpriteCollection();
         this.environment = new GameEnvironment();
         this.remainingBlocks = new Counter(levelInformation.numberOfBlocksToRemove());
-        this.remainingBalls = new Counter(0);
-        this.currentScore = new Counter(0);
-        this.runner = new AnimationRunner(gui, 60);
+        this.remainingBalls = new Counter(lvlInfo.numberOfBalls());
+        this.currentScore = score;
+        this.runner = ar;
+        running = true;
+    }
+
+    public LevelInformation getLevelInformation() {
+        return levelInformation;
+    }
+
+    public Counter getRemainingBalls() {
+        return remainingBalls;
     }
 
     /**
@@ -166,7 +175,7 @@ public class GameLevel implements Animation {
     private void initializePaddle() {
         Paddle pdl = new Paddle(new Block(new Rectangle(
                 new Point(400 - levelInformation.paddleWidth() / 2.0, GUI_HEIGHT - PADDLE_SIZE - FRAME_SIZE),
-                levelInformation.paddleWidth(), PADDLE_SIZE), new Color(243, 182, 41)), this.gui.getKeyboardSensor());
+                levelInformation.paddleWidth(), PADDLE_SIZE), new Color(243, 182, 41)), this.keyboard);
         pdl.setSpeed(levelInformation.paddleSpeed());
         setPaddle(pdl);
         this.paddle.addToGame(this);
@@ -228,12 +237,10 @@ public class GameLevel implements Animation {
         //stop the game and increase 100 points if no remaining blocks
         if (remainingBlocks.getValue() == 0) {
             currentScore.increase(100);
-            gui.close();
             this.running = false;
         }
         //stop the game if no remaining balls
         if (remainingBalls.getValue() == 0) {
-            gui.close();
             this.running = false;
         }
     }
