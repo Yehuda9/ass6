@@ -3,6 +3,9 @@ package game;
 import animation.Animation;
 import animation.AnimationRunner;
 import animation.CountdownAnimation;
+import animation.EndScreen;
+import animation.GameInfo;
+import animation.KeyPressStoppableAnimation;
 import animation.PauseScreen;
 import biuoop.DrawSurface;
 import biuoop.GUI;
@@ -50,13 +53,15 @@ public class GameLevel implements Animation {
     private AnimationRunner runner;
     private boolean running;
     private LevelInformation levelInformation;
+    private Counter lives;
+
 
     /**
      * create new game object with new game.SpriteCollection and game.GameEnvironment.
      *
      * @param lvlInfo holds level info reference
      */
-    public GameLevel(LevelInformation lvlInfo, KeyboardSensor keyboard, AnimationRunner ar, Counter score) {
+    public GameLevel(LevelInformation lvlInfo, KeyboardSensor keyboard, AnimationRunner ar, Counter score, Counter l) {
         //setGui(new GUI("game.Game", GUI_WIDTH, GUI_HEIGHT));
         this.levelInformation = lvlInfo;
         this.keyboard = keyboard;
@@ -67,6 +72,7 @@ public class GameLevel implements Animation {
         this.currentScore = score;
         this.runner = ar;
         running = true;
+        this.lives = l;
     }
 
     public LevelInformation getLevelInformation() {
@@ -75,6 +81,10 @@ public class GameLevel implements Animation {
 
     public Counter getRemainingBalls() {
         return remainingBalls;
+    }
+
+    public Counter getRemainingBlocks() {
+        return remainingBlocks;
     }
 
     /**
@@ -149,6 +159,8 @@ public class GameLevel implements Animation {
         Block scoreIndicatorBlock = new Block(new Rectangle(new Point(0, 0), GUI_WIDTH, FRAME_SIZE + 20), Color.white);
         ScoreIndicator scoreIndicator = new ScoreIndicator(scoreIndicatorBlock, currentScore);
         scoreIndicator.addToGame(this);
+        LivesIndicator livesIndicator = new LivesIndicator(this.lives);
+        livesIndicator.addToGame(this);
     }
 
     /**
@@ -196,15 +208,22 @@ public class GameLevel implements Animation {
      */
     private void createBallsOnTopOfPaddle() {
         int numOfBalls = levelInformation.numberOfBalls();
-        int ballXDelta = (int) this.paddle.getCollisionRectangle().getUpperLine().length() / (numOfBalls + 1);
+        int ballX = (int) this.paddle.getCollisionRectangle().getUpperLeft().getX()
+                + (int) this.paddle.getCollisionRectangle().getUpperLine().length() / 2;
         for (int i = 1; i <= numOfBalls; i++) {
-            Ball ball = new Ball((int) this.paddle.getCollisionRectangle().getUpperLeft().getX() + ballXDelta * i,
+            Ball ball =
+                    new Ball(ballX, this.paddle.getCollisionRectangle().getUpperLeft().getY() - BALLS_RADIUS_OR_SPEED,
+                            BALLS_RADIUS_OR_SPEED, Color.white, levelInformation.initialBallVelocities().get(i - 1),
+                            this.environment);
+            /*Ball ball = new Ball((int) this.paddle.getCollisionRectangle().getUpperLeft().getX() + ballXDelta * i,
                     this.paddle.getCollisionRectangle().getUpperLeft().getY() - BALLS_RADIUS_OR_SPEED,
                     BALLS_RADIUS_OR_SPEED, Color.white, levelInformation.initialBallVelocities().get(i - 1),
-                    this.environment);
+                    this.environment);*/
             ball.addToGame(this);
-            remainingBalls.increase(1);
+            //remainingBalls.increase(1);
         }
+        remainingBalls.setCounter(numOfBalls);
+
     }
 
     /**
@@ -232,16 +251,18 @@ public class GameLevel implements Animation {
         //make every element in the game to do its work
         this.sprites.notifyAllTimePassed();
         if (this.keyboard.isPressed("p")) {
-            this.runner.run(new PauseScreen(this.keyboard));
+            this.runner.run(new KeyPressStoppableAnimation(this.keyboard, "space", new PauseScreen()));
         }
         //stop the game and increase 100 points if no remaining blocks
         if (remainingBlocks.getValue() == 0) {
             currentScore.increase(100);
             this.running = false;
         }
+
         //stop the game if no remaining balls
         if (remainingBalls.getValue() == 0) {
             this.running = false;
+            //lives.decrease(1);
         }
     }
 

@@ -15,6 +15,10 @@ public class Counter {
         this.counter = number;
     }
 
+    public void setCounter(int c) {
+        this.counter = c;
+    }
+
     /**
      * add number to current count.
      *

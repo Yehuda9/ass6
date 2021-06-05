@@ -13,6 +13,7 @@ import java.awt.Color;
 public class ScoreIndicator implements Sprite {
     private Block block;
     private Counter score;
+    private Counter lives;
 
     /**
      * Instantiates a new Score indicator.
@@ -20,7 +21,7 @@ public class ScoreIndicator implements Sprite {
      * @param block the block
      * @param score the score
      */
-    public ScoreIndicator(Block block , Counter score) {
+    public ScoreIndicator(Block block, Counter score) {
         this.block = block;
         this.score = score;
     }
@@ -30,7 +31,8 @@ public class ScoreIndicator implements Sprite {
     public void drawOn(DrawSurface d) {
         block.drawOn(d);
         d.setColor(Color.black);
-        d.drawText(350 , 23 , "Score: " + score.getValue() , 20);
+        d.drawText(350, 23, "Score: " + score.getValue(), 20);
+        //d.drawText(500, 20, String.valueOf(this.lives.getValue()), 20);
     }
 
     @Override
