@@ -8,7 +8,7 @@ import sprite.Sprite;
 import sprite.Velocity;
 
 import java.awt.Color;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Green3 implements LevelInformation {
@@ -30,7 +30,7 @@ public class Green3 implements LevelInformation {
 
     @Override
     public List<Velocity> initialBallVelocities() {
-        List<Velocity> lst = new ArrayList<>();
+        List<Velocity> lst = new LinkedList<>();
         lst.add(Velocity.fromAngleAndSpeed(-45, 8));
         lst.add(Velocity.fromAngleAndSpeed(45, 8));
         return lst;
@@ -58,7 +58,7 @@ public class Green3 implements LevelInformation {
 
     @Override
     public List<Block> blocks() {
-        List<Block> lst = new ArrayList<>();
+        List<Block> lst = new LinkedList<>();
         int blockX = BLOCK_X_START;
         int blockY = BLOCK_Y;
         for (int i = 1; i <= 5; i++) {

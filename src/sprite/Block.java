@@ -8,7 +8,7 @@ import observer.HitListener;
 import observer.HitNotifier;
 
 import java.awt.Color;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -126,7 +126,7 @@ public class Block implements Collidable, Sprite, HitNotifier {
      */
     private void notifyHit(Ball hitter) {
         /*Make a copy of the hitListeners before iterating over them.*/
-        List<HitListener> listeners = new ArrayList<>(getHitListeners());
+        List<HitListener> listeners = new LinkedList<>(getHitListeners());
         /*Notify all listeners about a hit event*/
         for (HitListener hl : listeners) {
             hl.hitEvent(this, hitter);

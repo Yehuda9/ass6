@@ -8,7 +8,7 @@ import levels.FinalFour;
 import levels.Green3;
 import levels.WideEasy;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;

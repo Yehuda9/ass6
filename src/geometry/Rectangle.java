@@ -1,6 +1,6 @@
 package geometry;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -10,7 +10,7 @@ public class Rectangle {
     private Point upperLeft;
     private double width;
     private double height;
-    private List<Line> rectangleLines = new ArrayList<>();
+    private List<Line> rectangleLines = new LinkedList<>();
     private Line upperLine;
     private Line lowerLine;
     private Line rightLine;
@@ -36,7 +36,7 @@ public class Rectangle {
      * also, make list of those fields as a field.
      */
     private void createRectangleLines() {
-        List<Line> rectangleLinesList = new ArrayList<>();
+        List<Line> rectangleLinesList = new LinkedList<>();
         this.upperLine = new Line(this.getUpperLeft(),
                 new Point(this.getUpperLeft().getX() + this.getWidth(), this.getUpperLeft().getY()));
         this.leftLine = new Line(this.getUpperLeft(),
@@ -118,7 +118,7 @@ public class Rectangle {
      * @return list of intersection between this rectangle and the given line.
      */
     public java.util.List<Point> intersectionPoints(Line line) {
-        List<Point> intersectionPointsList = new ArrayList<>();
+        List<Point> intersectionPointsList = new LinkedList<>();
         for (Line l : this.getRectangleLines()) {
             if (l.isIntersecting(line) && l.intersectionWith(line) != null) {
                 intersectionPointsList.add(l.intersectionWith(line));

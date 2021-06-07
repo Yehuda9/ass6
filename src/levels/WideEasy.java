@@ -9,7 +9,7 @@ import sprite.Sprite;
 import sprite.Velocity;
 
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class WideEasy implements LevelInformation {
@@ -29,7 +29,7 @@ public class WideEasy implements LevelInformation {
 
     @Override
     public List<Velocity> initialBallVelocities() {
-        List<Velocity> lst = new ArrayList<>();
+        List<Velocity> lst = new LinkedList<>();
         for (int i = 5; i >= 1; i--) {
             Velocity velocity = Velocity.fromAngleAndSpeed(-10 * i, 8);
             lst.add(velocity);
@@ -63,7 +63,7 @@ public class WideEasy implements LevelInformation {
 
     @Override
     public List<Block> blocks() {
-        List<Block> lst = new ArrayList<>();
+        List<Block> lst = new LinkedList<>();
         int blockX = BLOCK_X_START;
         for (int i = 0; i < 3; i++) {
             Block block1 = new Block(new Rectangle(new Point(blockX, BLOCK_Y_START), BLOCK_WIDTH, BLOCK_HEIGHT),

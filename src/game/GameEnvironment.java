@@ -5,7 +5,8 @@ import geometry.Point;
 import sprite.Collidable;
 import sprite.CollisionInfo;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -18,7 +19,7 @@ public class GameEnvironment {
      * create new game environment.
      */
     public GameEnvironment() {
-        this.collidableCollection = new ArrayList<>();
+        this.collidableCollection = new LinkedList<>();
     }
 
     /**

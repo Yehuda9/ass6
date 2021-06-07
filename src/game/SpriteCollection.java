@@ -4,7 +4,7 @@ import biuoop.DrawSurface;
 import sprite.Sprite;
 
 import java.awt.Color;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -17,7 +17,7 @@ public class SpriteCollection {
      * create new sprites collection.
      */
     public SpriteCollection() {
-        this.spritesCollection = new ArrayList<>();
+        this.spritesCollection = new LinkedList<>();
     }
 
     /**
@@ -40,7 +40,7 @@ public class SpriteCollection {
      * call timePassed() on all sprites.
      */
     public void notifyAllTimePassed() {
-        List<Sprite> spriteList = new ArrayList<>(getSpritesCollection());
+        List<Sprite> spriteList = new LinkedList<>(getSpritesCollection());
         for (Sprite sprite : spriteList) {
             sprite.timePassed();
         }

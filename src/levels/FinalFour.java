@@ -8,7 +8,7 @@ import sprite.Sprite;
 import sprite.Velocity;
 
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -29,7 +29,7 @@ public class FinalFour implements LevelInformation {
 
     @Override
     public List<Velocity> initialBallVelocities() {
-        List<Velocity> lst = new ArrayList<>();
+        List<Velocity> lst = new LinkedList<>();
         for (int i = 0; i < 3; i++) {
             Velocity velocity = Velocity.fromAngleAndSpeed(-40 + 40 * i, 8);
             lst.add(velocity);
@@ -59,7 +59,7 @@ public class FinalFour implements LevelInformation {
 
     @Override
     public List<Block> blocks() {
-        List<Block> lst = new ArrayList<>();
+        List<Block> lst = new LinkedList<>();
         int blockX = BLOCK_X_START;
         int blockY = BLOCK_Y_START;
         for (int i = 0; i < 7; i++) {
