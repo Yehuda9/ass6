@@ -49,9 +49,9 @@ public class GameLevel implements Animation {
      *
      * @param lvlInfo holds level info reference
      */
-    public GameLevel(LevelInformation lvlInfo, KeyboardSensor keyboard, AnimationRunner ar, Counter score, Counter l) {
+    public GameLevel(LevelInformation lvlInfo, KeyboardSensor keyboardSensor, AnimationRunner ar, Counter score, Counter l) {
         this.levelInformation = lvlInfo;
-        this.keyboard = keyboard;
+        this.keyboard = keyboardSensor;
         this.sprites = new SpriteCollection();
         this.environment = new GameEnvironment();
         this.remainingBlocks = new Counter(levelInformation.numberOfBlocksToRemove());
