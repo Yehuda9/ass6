@@ -47,9 +47,14 @@ public class GameLevel implements Animation {
     /**
      * create new game object with new game.SpriteCollection and game.GameEnvironment.
      *
-     * @param lvlInfo holds level info reference
+     * @param lvlInfo        holds level info reference
+     * @param keyboardSensor keyboard sensor
+     * @param ar             animation runner
+     * @param l              lives counter
+     * @param score          score counter
      */
-    public GameLevel(LevelInformation lvlInfo, KeyboardSensor keyboardSensor, AnimationRunner ar, Counter score, Counter l) {
+    public GameLevel(LevelInformation lvlInfo, KeyboardSensor keyboardSensor, AnimationRunner ar, Counter score,
+                     Counter l) {
         this.levelInformation = lvlInfo;
         this.keyboard = keyboardSensor;
         this.sprites = new SpriteCollection();
@@ -62,6 +67,11 @@ public class GameLevel implements Animation {
         this.lives = l;
     }
 
+    /**
+     * getRemainingBlocks.
+     *
+     * @return remainingBlocks
+     */
     public Counter getRemainingBlocks() {
         return remainingBlocks;
     }
@@ -115,7 +125,8 @@ public class GameLevel implements Animation {
     }
 
     /**
-     * create score indicator block from block and counter.
+     * create game info block from block and counter.
+     * game info hold reference to score, lives and level name and show them on the screen.
      */
     private void initializeGameInfo() {
         Block gameInfoBlock = new Block(new Rectangle(new Point(0, 0), GUI_WIDTH, FRAME_SIZE + 20), Color.white);
@@ -153,6 +164,9 @@ public class GameLevel implements Animation {
         this.paddle.addToGame(this);
     }
 
+    /**
+     * iterate block list from level information add each block to the game and add listeners to the blocks.
+     */
     private void initializeBlocks() {
         BlockRemover blockRemover = new BlockRemover(this, remainingBlocks);
         ScoreTrackingListener scoreTrackingListener = new ScoreTrackingListener(currentScore);
@@ -164,13 +178,13 @@ public class GameLevel implements Animation {
     }
 
     /**
-     * create 3 balls.
+     * create balls from list of velocities given by level information.
      */
     private void createBallsOnTopOfPaddle() {
         this.remainingBalls.setCounter(levelInformation.numberOfBalls());
+        //x position of ball is always center of paddle.
         int ballX = (int) this.paddle.getCollisionRectangle().getUpperLeft().getX()
                 + (int) this.paddle.getCollisionRectangle().getUpperLine().length() / 2;
-
         for (int i = 0; i < this.remainingBalls.getValue(); i++) {
             Ball ball =
                     new Ball(ballX, this.paddle.getCollisionRectangle().getUpperLeft().getY() - BALLS_RADIUS_OR_SPEED,
@@ -205,14 +219,14 @@ public class GameLevel implements Animation {
         //make every element in the game to do its work
         this.sprites.notifyAllTimePassed();
         if (this.keyboard.isPressed("p")) {
-            this.runner.run(new KeyPressStoppableAnimation(this.keyboard, "space", new PauseScreen()));
+            this.runner.run(new KeyPressStoppableAnimation(this.keyboard, keyboard.SPACE_KEY, new PauseScreen()));
         }
-        //stop the game and increase 100 points if no remaining blocks
+        //stop the level and increase 100 points if no remaining blocks
         if (remainingBlocks.getValue() == 0) {
             currentScore.increase(100);
             this.running = false;
         }
-        //stop the game if no remaining balls
+        //stop the level if no remaining balls
         if (remainingBalls.getValue() == 0) {
             this.running = false;
         }
@@ -223,6 +237,10 @@ public class GameLevel implements Animation {
         return !this.running;
     }
 
+    /**
+     * run the level.
+     * set paddle to bottom center of screen, create balls, run countdown animation and finally run level animation.
+     */
     public void run() {
         this.paddle.setXPosition(GUI_WIDTH / 2 - levelInformation.paddleWidth() / 2);
         this.createBallsOnTopOfPaddle(); // or a similar method

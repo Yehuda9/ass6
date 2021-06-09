@@ -15,6 +15,11 @@ public class Counter {
         this.counter = number;
     }
 
+    /**
+     * set counter.
+     *
+     * @param c set counter to c value
+     */
     public void setCounter(int c) {
         this.counter = c;
     }

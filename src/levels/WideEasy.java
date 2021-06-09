@@ -3,23 +3,23 @@ package levels;
 import game.LevelInformation;
 import geometry.Point;
 import geometry.Rectangle;
-import sprite.Ball;
 import sprite.Block;
 import sprite.Sprite;
 import sprite.Velocity;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * The type Wide easy.
+ */
 public class WideEasy implements LevelInformation {
-    public static final int GUI_WIDTH = 800;
+    public static final int PADDLE_SPEED = 5;
     private static final int BLOCK_WIDTH = 52;
     private static final int BLOCK_HEIGHT = 30;
-    private static final int GUI_HEIGHT = 600;
     private static final int BLOCK_X_START = 10;
     private static final int BLOCK_Y_START = 250;
-    public static final int PADDLE_SPEED = 5;
     private static final int PADDLE_WIDTH = 600;
 
     @Override
@@ -31,11 +31,11 @@ public class WideEasy implements LevelInformation {
     public List<Velocity> initialBallVelocities() {
         List<Velocity> lst = new LinkedList<>();
         for (int i = 5; i >= 1; i--) {
-            Velocity velocity = Velocity.fromAngleAndSpeed(-10 * i, 8);
+            Velocity velocity = Velocity.fromAngleAndSpeed(-10.5 * i, 8);
             lst.add(velocity);
         }
         for (int i = 1; i <= 5; i++) {
-            Velocity velocity = Velocity.fromAngleAndSpeed(10 * i, 8);
+            Velocity velocity = Velocity.fromAngleAndSpeed(10.5 * i, 8);
             lst.add(velocity);
         }
         return lst;

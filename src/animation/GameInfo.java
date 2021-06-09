@@ -8,12 +8,23 @@ import sprite.Sprite;
 
 import java.awt.Color;
 
+/**
+ * The type Game info.
+ */
 public class GameInfo implements Sprite {
     private Block block;
     private Counter score;
     private Counter lives;
     private String levelName;
 
+    /**
+     * Instantiates a new Game info.
+     *
+     * @param b    the block
+     * @param s    the score counter
+     * @param l    the lives counter
+     * @param name level name
+     */
     public GameInfo(Block b, Counter s, Counter l, String name) {
         this.block = b;
         this.score = s;

@@ -2,11 +2,13 @@ package levels;
 
 import biuoop.DrawSurface;
 import game.GameLevel;
-import geometry.Line;
 import sprite.Sprite;
 
-import java.awt.*;
+import java.awt.Color;
 
+/**
+ * The type Wide easy background.
+ */
 public class WideEasyBackground implements Sprite {
     private static final int BLOCK_Y_START = 250;
 

@@ -6,6 +6,9 @@ import sprite.Sprite;
 
 import java.awt.Color;
 
+/**
+ * The type Direct hit background.
+ */
 public class DirectHitBackground implements Sprite {
     public static final int GUI_WIDTH = 800;
     private static final int GUI_HEIGHT = 600;

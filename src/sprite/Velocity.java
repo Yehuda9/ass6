@@ -15,7 +15,7 @@ public class Velocity {
      * @param dx specify the change in position on the X axis
      * @param dy specify the change in position on the Y axis
      */
-    public Velocity(double dx , double dy) {
+    public Velocity(double dx, double dy) {
         this.dx = dx;
         this.dy = dy;
     }
@@ -24,7 +24,7 @@ public class Velocity {
      * default constructor.
      */
     public Velocity() {
-        this(0 , 0);
+        this(0, 0);
     }
 
     /**
@@ -37,10 +37,10 @@ public class Velocity {
      * @param speed speed
      * @return new instance of velocity.
      */
-    public static Velocity fromAngleAndSpeed(double angle , double speed) {
+    public static Velocity fromAngleAndSpeed(double angle, double speed) {
         double dy = -Math.cos(Math.toRadians(angle)) * speed;
         double dx = Math.sin(Math.toRadians(angle)) * speed;
-        return new Velocity(dx , dy);
+        return new Velocity(dx, dy);
     }
 
     /**
@@ -62,6 +62,6 @@ public class Velocity {
      * @return new point which is the previous point with movement on X and Y by this velocity fields.
      */
     public Point applyToPoint(Point p) {
-        return new Point(p.getX() + this.dx , p.getY() + this.dy);
+        return new Point(p.getX() + this.dx, p.getY() + this.dy);
     }
 }

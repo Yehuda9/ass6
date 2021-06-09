@@ -7,17 +7,17 @@ import sprite.Block;
 import sprite.Sprite;
 import sprite.Velocity;
 
-import java.awt.*;
-import java.util.LinkedList;
+import java.awt.Color;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * The type Final four.
+ */
 public class FinalFour implements LevelInformation {
-    public static final int GUI_WIDTH = 800;
     public static final int PADDLE_SPEED = 12;
     private static final int BLOCK_WIDTH = 52;
     private static final int BLOCK_HEIGHT = 30;
-    private static final int GUI_HEIGHT = 600;
     private static final int BLOCK_X_START = 10;
     private static final int BLOCK_Y_START = 100;
     private static final int PADDLE_WIDTH = 100;

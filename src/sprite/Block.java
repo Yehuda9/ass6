@@ -9,7 +9,6 @@ import observer.HitNotifier;
 
 import java.awt.Color;
 import java.util.LinkedList;
-import java.util.LinkedList;
 import java.util.List;
 
 /**

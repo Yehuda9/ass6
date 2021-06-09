@@ -15,7 +15,7 @@ public class CollisionInfo {
      * @param collisionPoint  the point at which the collision occurs
      * @param collisionObject the collidable object involved in the collision.
      */
-    public CollisionInfo(Point collisionPoint , Collidable collisionObject) {
+    public CollisionInfo(Point collisionPoint, Collidable collisionObject) {
         this.collisionPoint = collisionPoint;
         this.collisionObject = collisionObject;
     }

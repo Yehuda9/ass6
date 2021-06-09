@@ -16,7 +16,7 @@ public class BlockRemover implements HitListener {
     /**
      * Instantiates a new Block remover.
      *
-     * @param gameLevel          the game
+     * @param gameLevel     the game
      * @param removedBlocks the removed blocks
      */
     public BlockRemover(GameLevel gameLevel, Counter removedBlocks) {
@@ -26,7 +26,7 @@ public class BlockRemover implements HitListener {
 
     /*Blocks that are hit should be removed from the game, update counter of remaining blocks*/
     @Override
-    public void hitEvent(Block beingHit , Ball hitter) {
+    public void hitEvent(Block beingHit, Ball hitter) {
         beingHit.removeFromGame(gameLevel);
         remainingBlocks.decrease(1);
         beingHit.removeHitListener(this);

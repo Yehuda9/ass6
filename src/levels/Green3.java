@@ -11,6 +11,9 @@ import java.awt.Color;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * The type Green 3.
+ */
 public class Green3 implements LevelInformation {
     public static final int GUI_WIDTH = 800;
     private static final int BLOCK_WIDTH = 52;

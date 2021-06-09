@@ -15,7 +15,7 @@ public class BallRemover implements HitListener {
     /**
      * Instantiates a new Ball remover.
      *
-     * @param gameLevel         the game
+     * @param gameLevel    the game
      * @param removedBalls the removed balls
      */
     public BallRemover(GameLevel gameLevel, Counter removedBalls) {
@@ -25,7 +25,7 @@ public class BallRemover implements HitListener {
 
     /*remove the ball that fell out of screen, and decrease balls counter*/
     @Override
-    public void hitEvent(Block beingHit , Ball hitter) {
+    public void hitEvent(Block beingHit, Ball hitter) {
         gameLevel.removeSprite(hitter);
         remainingBalls.decrease(1);
     }

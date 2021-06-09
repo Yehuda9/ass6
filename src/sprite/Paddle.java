@@ -22,6 +22,7 @@ public class Paddle implements Sprite, Collidable {
      *
      * @param keyboardSensor to move paddle
      * @param block          of paddle
+     * @param s              speed of paddle
      */
     public Paddle(Block block, KeyboardSensor keyboardSensor, int s) {
         this.block = block;
@@ -38,12 +39,23 @@ public class Paddle implements Sprite, Collidable {
         this(new Block(new Rectangle(new Point(360, 570), 150, 20), new Color(236, 99, 64)), keyboardSensor, 7);
     }
 
+    /**
+     * move paddle to specific x position.
+     * create new block for paddle in the given location
+     *
+     * @param x position
+     */
     public void setXPosition(int x) {
         this.block = new Block(new Rectangle(new Point(x, block.getCollisionRectangle().getUpperLeft().getY()),
                 block.getCollisionRectangle().getWidth(), block.getCollisionRectangle().getHeight()),
                 getBlock().getColor());
     }
 
+    /**
+     * set speed of paddle.
+     *
+     * @param s speed
+     */
     public void setSpeed(int s) {
         this.speed = s;
     }

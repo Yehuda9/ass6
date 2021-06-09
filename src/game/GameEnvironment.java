@@ -6,7 +6,6 @@ import sprite.Collidable;
 import sprite.CollisionInfo;
 
 import java.util.LinkedList;
-import java.util.LinkedList;
 import java.util.List;
 
 /**

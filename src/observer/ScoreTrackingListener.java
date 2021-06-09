@@ -20,7 +20,7 @@ public class ScoreTrackingListener implements HitListener {
 
     /*if ball hit block, add 5 points*/
     @Override
-    public void hitEvent(Block beingHit , Ball hitter) {
+    public void hitEvent(Block beingHit, Ball hitter) {
         currentScore.increase(5);
     }
 }

@@ -52,8 +52,8 @@ public class SpriteCollection {
      * @param d draw surface to draw sprites on it.
      */
     public void drawAllOn(DrawSurface d) {
-        d.setColor(new Color(24 , 47 , 78));
-        d.fillRectangle(0 , 0 , 800 , 600);
+        d.setColor(new Color(24, 47, 78));
+        d.fillRectangle(0, 0, 800, 600);
         for (Sprite sprite : this.spritesCollection) {
             sprite.drawOn(d);
         }

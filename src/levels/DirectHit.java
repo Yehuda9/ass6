@@ -9,9 +9,11 @@ import sprite.Velocity;
 
 import java.awt.Color;
 import java.util.LinkedList;
-import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * The type Direct hit.
+ */
 public class DirectHit implements LevelInformation {
     public static final int GUI_WIDTH = 800;
     public static final int PADDLE_SPEED = 7;

@@ -14,7 +14,7 @@ public class Line {
      * @param start start point of line
      * @param end   end point of line
      */
-    public Line(Point start , Point end) {
+    public Line(Point start, Point end) {
         this.start = start;
         this.end = end;
     }
@@ -25,9 +25,9 @@ public class Line {
      * @param x2 x value of end point of line
      * @param y2 y value of start point of line
      */
-    public Line(double x1 , double y1 , double x2 , double y2) {
-        this.start = new Point(x1 , y1);
-        this.end = new Point(x2 , y2);
+    public Line(double x1, double y1, double x2, double y2) {
+        this.start = new Point(x1, y1);
+        this.end = new Point(x2, y2);
     }
 
     /**
@@ -54,7 +54,7 @@ public class Line {
     public Point middle() {
         double xMid = (this.start().getX() + this.end().getX()) / 2;
         double yMid = (this.start().getY() + this.end().getY()) / 2;
-        return new Point(xMid , yMid);
+        return new Point(xMid, yMid);
     }
 
     /**
@@ -81,7 +81,7 @@ public class Line {
      * @param c third point
      * @return true if 3 points in clockwise order, false otherwise.
      */
-    private boolean isClockWise(Point a , Point b , Point c) {
+    private boolean isClockWise(Point a, Point b, Point c) {
         return (c.getY() - a.getY()) * (b.getX() - a.getX()) > (b.getY() - a.getY()) * (c.getX() - a.getX());
     }
 
@@ -154,7 +154,7 @@ public class Line {
      * @param other line to compare with
      * @return true if points is one both lines, false otherwise
      */
-    private boolean isOnBothLines(Point point , Line other) {
+    private boolean isOnBothLines(Point point, Line other) {
         return this.isOnLine(point) && other.isOnLine(point);
     }
 
@@ -173,15 +173,15 @@ public class Line {
         //if only one line parallel to Y axis, create new point of possible intersection with the line equation
         if (other.incline() == Double.POSITIVE_INFINITY && this.incline() != Double.POSITIVE_INFINITY) {
             double y = (this.incline() * other.start().getX()) + this.yAxisIntersection();
-            possibleInter = new Point(other.start().getX() , y);
+            possibleInter = new Point(other.start().getX(), y);
         }
         //if only one line parallel to Y axis, create new point of possible intersection with the line equation
         if (this.incline() == Double.POSITIVE_INFINITY && other.incline() != Double.POSITIVE_INFINITY) {
             double y = (other.incline() * this.start().getX()) + other.yAxisIntersection();
-            possibleInter = new Point(this.start().getX() , y);
+            possibleInter = new Point(this.start().getX(), y);
         }
         //check if possible intersection is on both lines, and return
-        if (isOnBothLines(possibleInter , other)) {
+        if (isOnBothLines(possibleInter, other)) {
             return possibleInter;
         }
         return null;
@@ -209,9 +209,9 @@ public class Line {
         if (other.incline() == this.incline()) {
             return false;
         }
-        return isClockWise(this.start() , other.start() , other.end()) != isClockWise(this.end() , other.start() ,
-                other.end()) && (isClockWise(this.start() , this.end() , other.start()) != isClockWise(this.start() ,
-                this.end() , other.end()));
+        return isClockWise(this.start(), other.start(), other.end()) != isClockWise(this.end(), other.start(),
+                other.end()) && (isClockWise(this.start(), this.end(), other.start()) != isClockWise(this.start(),
+                this.end(), other.end()));
     }
 
     /**
@@ -249,8 +249,8 @@ public class Line {
         }
         double x = (this.yAxisIntersection() - other.yAxisIntersection()) / (other.incline() - this.incline());
         double y = (this.incline() * x) + this.yAxisIntersection();
-        Point possibleInter = new Point(x , y);
-        if (isOnBothLines(possibleInter , other)) {
+        Point possibleInter = new Point(x, y);
+        if (isOnBothLines(possibleInter, other)) {
             return possibleInter;
         }
         return null;

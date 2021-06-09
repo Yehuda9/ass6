@@ -12,7 +12,7 @@ public class Point {
      * @param x x value of point
      * @param y y value of point
      */
-    public Point(double x , double y) {
+    public Point(double x, double y) {
         this.x = x;
         this.y = y;
     }
@@ -24,7 +24,7 @@ public class Point {
      * @return distance from this point to other
      */
     public double distance(Point other) {
-        return Math.sqrt(Math.pow(other.getX() - this.getX() , 2) + Math.pow(other.getY() - this.getY() , 2));
+        return Math.sqrt(Math.pow(other.getX() - this.getX(), 2) + Math.pow(other.getY() - this.getY(), 2));
     }
 
     /**

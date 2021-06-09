@@ -3,6 +3,9 @@ package animation;
 import biuoop.DrawSurface;
 import biuoop.KeyboardSensor;
 
+/**
+ * The type Key press stoppable animation.
+ */
 public class KeyPressStoppableAnimation implements Animation {
     private KeyboardSensor keyboardSensor;
     private String key;
@@ -10,6 +13,13 @@ public class KeyPressStoppableAnimation implements Animation {
     private boolean stop;
     private boolean isAlreadyPressed;
 
+    /**
+     * Instantiates a new Key press stoppable animation.
+     *
+     * @param sensor keyboard sensor from gui
+     * @param k      key to stop animation
+     * @param a      animation to run
+     */
     public KeyPressStoppableAnimation(KeyboardSensor sensor, String k, Animation a) {
         this.keyboardSensor = sensor;
         this.key = k;
@@ -24,7 +34,7 @@ public class KeyPressStoppableAnimation implements Animation {
             this.stop = true;
         }
         if (!keyboardSensor.isPressed(key)) {
-            isAlreadyPressed = false;
+            this.isAlreadyPressed = false;
         }
     }
 

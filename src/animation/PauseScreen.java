@@ -2,6 +2,9 @@ package animation;
 
 import biuoop.DrawSurface;
 
+/**
+ * The type Pause screen.
+ */
 public class PauseScreen implements Animation {
 
     @Override
@@ -10,5 +13,7 @@ public class PauseScreen implements Animation {
     }
 
     @Override
-    public boolean shouldStop() { return false; }
+    public boolean shouldStop() {
+        return false;
+    }
 }

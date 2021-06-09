@@ -1,16 +1,12 @@
-import animation.AnimationRunner;
-import biuoop.GUI;
 import game.GameFlow;
 import game.LevelInformation;
 import levels.DirectHit;
-import game.GameLevel;
 import levels.FinalFour;
 import levels.Green3;
 import levels.WideEasy;
 
 import java.util.LinkedList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +25,13 @@ public class Ass6Game {
         gameFlow.runLevels(ass6Game.argsToLevels(args));
     }
 
+    /**
+     * create map to map "1"-"4" to levels by order, and add the right level to list.
+     * if args doesn't have valid values, recursively run this method with array from 1 to 4.
+     *
+     * @param args strings representing levels of game.
+     * @return list of levels by args.
+     */
     public List<LevelInformation> argsToLevels(String[] args) {
         List<LevelInformation> result = new LinkedList<>();
         Map<String, LevelInformation> levelInformations = new HashMap<>();

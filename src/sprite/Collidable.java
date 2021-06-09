@@ -27,7 +27,7 @@ public interface Collidable {
      * @param currentVelocity of ball
      * @return new velocity expected after the hit
      */
-    Velocity hit(Point collisionPoint , Velocity currentVelocity);
+    Velocity hit(Point collisionPoint, Velocity currentVelocity);
 
     /**
      * calls old hit method and return its result,
@@ -38,5 +38,5 @@ public interface Collidable {
      * @param currentVelocity of ball
      * @return new velocity expected after the hit
      */
-    Velocity hit(Ball hitter , Point collisionPoint , Velocity currentVelocity);
+    Velocity hit(Ball hitter, Point collisionPoint, Velocity currentVelocity);
 }

@@ -4,8 +4,11 @@ import biuoop.DrawSurface;
 import game.GameLevel;
 import sprite.Sprite;
 
-import java.awt.*;
+import java.awt.Color;
 
+/**
+ * The type Green 3 background.
+ */
 public class Green3Background implements Sprite {
     @Override
     public void drawOn(DrawSurface d) {
