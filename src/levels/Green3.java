@@ -16,14 +16,13 @@ import java.util.List;
  */
 public class Green3 implements LevelInformation {
     public static final int GUI_WIDTH = 800;
+    public static final int PADDLE_SPEED = 10;
     private static final int BLOCK_WIDTH = 52;
     private static final int BLOCK_HEIGHT = 30;
     private static final int GUI_HEIGHT = 600;
     private static final int BLOCK_X_START = 322;
     private static final int BLOCK_Y = 150;
-    public static final int PADDLE_SPEED = 10;
     private static final int PADDLE_WIDTH = 150;
-
 
 
     @Override
@@ -79,6 +78,6 @@ public class Green3 implements LevelInformation {
 
     @Override
     public int numberOfBlocksToRemove() {
-        return blocks().size();
+        return blocks().size() / 2;
     }
 }
