@@ -59,7 +59,7 @@ public class GameLevel implements Animation {
         this.keyboard = keyboardSensor;
         this.sprites = new SpriteCollection();
         this.environment = new GameEnvironment();
-        this.remainingBlocks = new Counter(levelInformation.numberOfBlocksToRemove());
+        this.remainingBlocks = new Counter(levelInformation.blocks().size());
         this.remainingBalls = new Counter(lvlInfo.numberOfBalls());
         this.currentScore = score;
         this.runner = ar;

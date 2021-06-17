@@ -44,7 +44,9 @@ public class GameFlow {
             GameLevel level = new GameLevel(levelInfo, this.keyboardSensor, this.animationRunner, score, this.lives);
             level.initialize();
             //while still remain lives and still remain blocks, run level.
-            while (this.lives.getValue() > 0 && level.getRemainingBlocks().getValue() > 0) {
+            while (this.lives.getValue() > 0
+                    && level.getRemainingBlocks().getValue() > levelInfo.blocks().size() - levelInfo
+                    .numberOfBlocksToRemove()) {
                 level.run();
                 //when one turn ends with blocks still on the screen, decrease lives.
                 if (level.getRemainingBlocks().getValue() > 0) {

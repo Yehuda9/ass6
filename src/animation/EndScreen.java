@@ -23,7 +23,7 @@ public class EndScreen implements Animation {
     @Override
     public void doOneFrame(DrawSurface d) {
         if (!this.winOrLose) {
-            d.drawText(10, d.getHeight() / 2, "Game Over. Your score is " + this.score, 32);
+            d.drawText(10, d.getHeight() / 2, "Game Over, you lose. Your score is " + this.score, 32);
         } else {
             d.drawText(10, d.getHeight() / 2, "You Win! Your score is " + this.score, 32);
         }
