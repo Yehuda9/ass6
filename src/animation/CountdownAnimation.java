@@ -49,7 +49,7 @@ public class CountdownAnimation implements Animation {
         d.drawText((d.getWidth() / 2) - 13, (d.getHeight() / 2) - 20, String.valueOf(this.countFrom), 50);
         double currentTime = System.currentTimeMillis();
         if (currentTime - this.startTime > numOfSeconds / numOfCounts) {
-            countFrom--;
+            this.countFrom--;
             this.first = true;
         }
         if (this.countFrom <= 0) {
